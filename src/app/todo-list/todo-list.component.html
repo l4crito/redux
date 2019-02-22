@@ -1,0 +1,73 @@
+<h6>Lista de tareas</h6>
+<form (ngSubmit)="obSubmit()" #todoForm="ngForm">
+  <div class="form-row">
+    <div class="col-auto">
+        <input 
+          type="text" 
+          class="form-control" 
+          placeholder="Tarea"
+          id="description"
+          [(ngModel)]="model.description"
+          name="description"
+          #description="ngModel">
+    </div>
+    <div class="col-auto">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Responsable"
+        id="responsible"
+        [(ngModel)]="model.responsible"
+        name="responsible"
+        #responsible="ngModel">
+    </div>
+    <div class="col-auto">
+      <select 
+        class="form-control"
+        id="priority"
+        [(ngModel)]="model.priority"
+        name="priority"
+        #priority="ngModel">
+        <option value="low">Baja</option>
+        <option value="medium">Media</option>
+        <option value="high">Alta</option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Crear tarea</button>
+    </div>
+  </div>
+</form>
+<br />
+<h6>Tareas:</h6>
+<div *ngIf="(todos | async)?.length!=0">
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>#</th>
+      <th>Tarea</th>
+      <th>Responsable</th>
+      <th>Prioridad</th>
+      <th >Eliminar tarea</th>
+      <th >Fecha</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let t of todos | async">
+      <td><span (click)="toggleTodo(t)" [class.completed]="t.isCompleted">{{ t.id }}</span></td>
+      <td><span (click)="toggleTodo(t)" [class.completed]="t.isCompleted">{{ t.description }}</span></td>
+      <td><span (click)="toggleTodo(t)" [class.completed]="t.isCompleted">{{ t.responsible }}</span></td>
+      <td>
+        <span *ngIf="t.priority == 'low'" class="badge badge-success">Baja</span>
+        <span *ngIf="t.priority == 'medium'" class="badge badge-warning">Media</span>
+        <span *ngIf="t.priority == 'high'" class="badge badge-danger">Alta</span>
+      </td>
+      <td style="text-align:center"><button class="btn btn-primary" (click)="removeTodo(t)">Borrar</button></td>
+      <td style="text-align:center">
+        <span >{{ t.creationDate | date:'mediumDate'}} - {{ t.creationDate | date:'mediumTime'}}</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+

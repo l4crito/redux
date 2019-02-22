@@ -1,0 +1,5 @@
+
+<p class="text-right"><span class="badge badge-secondary">Ultima actualizacion: {{ (lastUpdate | async) | date:'mediumTime' }} | Items: {{ (todos | async).length }}</span></p>
+<button class="btn btn-primary" (click)="clearTodos()">Borrar todas las tareas</button>
+<br /><br />
+

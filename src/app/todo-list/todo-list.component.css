@@ -1,0 +1,10 @@
+
+.completed { 
+    text-decoration: line-through;
+  }
+
+  table {text-align: center;border: solid black 1px; }
+
+  td{text-align: center;border: solid black 1px;}
+
+  th{text-align: center;border: solid black 1px;}
